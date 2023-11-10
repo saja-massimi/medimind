@@ -28,9 +28,11 @@ class Sign_In extends StatelessWidget {
 
                 const Padding(padding: EdgeInsets.all(20),
                 child: TextButton(onPressed:null, child: Text('Sign in')),
+                
 
-              )
-
+              ),
+               const Checkbox(value: true, onChanged: null),
+                
             ],
            ),
          ),
