@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:medi_mind/signin_page.dart';
 
-
 void main() {
   runApp(const MyApp());
 }
@@ -17,8 +16,7 @@ class MyApp extends StatelessWidget {
         colorScheme: ColorScheme.fromSeed(seedColor: Colors.deepPurple),
         useMaterial3: true,
       ),
-      home:const Sign_In(),
+      home: const Sign_In(),
     );
   }
 }
-
