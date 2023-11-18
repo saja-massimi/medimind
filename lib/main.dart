@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:medi_mind/sign_up.dart';
 import 'package:medi_mind/signin_page.dart';
 
 void main() {
@@ -13,10 +14,11 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return MaterialApp(
       theme: ThemeData(
-        colorScheme: ColorScheme.fromSeed(seedColor: Colors.deepPurple),
+        colorScheme: ColorScheme.fromSeed(
+            seedColor: const Color.fromARGB(255, 255, 255, 255)),
         useMaterial3: true,
       ),
-      home: const Sign_In(),
+      home: Sign_In(),
     );
   }
 }
