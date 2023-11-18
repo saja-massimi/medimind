@@ -18,7 +18,7 @@ class _Sign_up extends State<sign_up> {
       backgroundColor: Colors.brown,
       appBar: AppBar(
         backgroundColor: Colors.brown,
-        title: const Text('Sign Up Page',
+        title: const Text('Sign Up',
             style: TextStyle(color: Color.fromARGB(255, 255, 255, 255))),
       ),
       body: Padding(
