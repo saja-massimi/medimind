@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-
+import 'package:intl/intl.dart';
 class addMed extends StatefulWidget {
   const addMed({super.key});
 
@@ -8,6 +8,10 @@ class addMed extends StatefulWidget {
 }
 
 class _addMedState extends State<addMed> {
+DateTime? _selectedDate;
+DateTime? _lastSelectedDate; 
+final formatter = DateFormat().add_yMd();
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -44,19 +48,31 @@ child:   Column(
 
              Row(
                 children: [
-                  const Text('Start Date'),
-                  IconButton(onPressed: (){
-                    showDatePicker(context: context,
+                 const  Text('Start Date'),
+                  const SizedBox(width: 10),
+                  Text(_selectedDate==null?'No Date Selected':  formatter.format(_selectedDate!)),
+                  IconButton(onPressed:  ()async{
+
+                   final DateTime? pickedDate = await showDatePicker
+                   (context: context,
                      firstDate: DateTime.now(), 
-                     lastDate: DateTime(2035)).then((value) => null);
+                     lastDate: DateTime(2035));
+                      setState(() {
+                        _selectedDate = pickedDate;
+                      });
                     },
-                     icon: const Icon(Icons.calendar_month)),
+                   icon: const Icon(Icons.calendar_month)),
                   const SizedBox(width: 10),
                    const Text('End Date'),
-                   IconButton(onPressed: (){
-                    showDatePicker(context: context,
+                    const SizedBox(width: 10),
+                  Text(_lastSelectedDate==null?'No Date Selected':  formatter.format(_lastSelectedDate!)),
+                   IconButton(onPressed: ()async{
+                    final DateTime? lastPickedDate=await showDatePicker(context: context,
                      firstDate: DateTime.now(), 
                      lastDate: DateTime(2027));
+                     setState(() {
+                       _lastSelectedDate = lastPickedDate;
+                     });
                     }, 
                     icon: const Icon(Icons.calendar_month)),
                 ],
