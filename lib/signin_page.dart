@@ -3,8 +3,6 @@ import 'package:medi_mind/sign_up.dart';
 
 class Sign_In extends StatefulWidget {
   const Sign_In({super.key});
-  @override
-  // ignore: library_private_types_in_public_api
   _Sign_in createState() => _Sign_in();
 }
 
@@ -46,11 +44,11 @@ class _Sign_in extends State<Sign_In> {
                     labelStyle: TextStyle(color: Colors.white)),
               ),
             ),
-            const SizedBox(height: 20),
+            SizedBox(height: 20),
             TextButton(
               onPressed: () {},
               style: TextButton.styleFrom(foregroundColor: Color(50)),
-              child:const Text(
+              child: const Text(
                 'Forget Password?',
                 style: TextStyle(color: Colors.black45),
               ),
@@ -67,8 +65,8 @@ class _Sign_in extends State<Sign_In> {
                     'Signing up with email: $username and password: $password ');
               },
               style: OutlinedButton.styleFrom(
-                  foregroundColor: const Color.fromARGB(255, 255, 255, 255)),
-              child: const Text('Sign in'),
+                  foregroundColor: Color.fromARGB(255, 255, 255, 255)),
+              child: Text('Sign in'),
             ),
             const SizedBox(height: 20),
             OutlinedButton(
@@ -77,8 +75,8 @@ class _Sign_in extends State<Sign_In> {
                     MaterialPageRoute(builder: (context) => sign_up()));
               },
               style: OutlinedButton.styleFrom(
-                  foregroundColor: const Color.fromARGB(255, 255, 255, 255)),
-              child: const Text('Sign up'),
+                  foregroundColor: Color.fromARGB(255, 255, 255, 255)),
+              child: Text('sign up'),
             ),
           ],
         ),

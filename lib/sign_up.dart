@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:medi_mind/home.dart';
 
+enum Gender { Female, Male }
 
 // ignore: camel_case_types
 class sign_up extends StatefulWidget {
@@ -51,6 +52,27 @@ class _Sign_up extends State<sign_up> {
                   labelText: 'Phone Number',
                   labelStyle: TextStyle(color: Colors.white)),
             ),
+            Row(
+              children: [
+                const SizedBox(height: 100),
+                const Text(
+                  'Gender',
+                  style: TextStyle(color: Colors.white),
+                ),
+                DropdownButton(
+                    items: Gender.values
+                        .map(
+                          (gender) => DropdownMenuItem(
+                            value: gender,
+                            child: Text(
+                              gender.name.toString(),
+                            ),
+                          ),
+                        )
+                        .toList(),
+                    onChanged: (value) {}),
+              ],
+            ),
             const SizedBox(height: 20.0),
             OutlinedButton(
               onPressed: () {
@@ -59,7 +81,7 @@ class _Sign_up extends State<sign_up> {
                 String password = _passwordController.text;
                 // ignore: non_constant_identifier_names
                 String phone_number = _phoneController.text;
-                 Navigator.push(context,
+                Navigator.push(context,
                     MaterialPageRoute(builder: (context) => const Home()));
                 // Perform sign-up operations
                 // ignore: avoid_print
