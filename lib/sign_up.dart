@@ -82,7 +82,7 @@ class _Sign_up extends State<sign_up> {
                 // ignore: non_constant_identifier_names
                 String phone_number = _phoneController.text;
                  Navigator.push(context,
-                    MaterialPageRoute(builder: (context) => const Home()));
+                    MaterialPageRoute(builder: (context) => Home()));
                 // Perform sign-up operations
                 // ignore: avoid_print
                 print(
