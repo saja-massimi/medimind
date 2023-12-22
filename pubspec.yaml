@@ -20,7 +20,7 @@ version: 1.0.0+1
 
 environment:
   sdk: '>=3.0.0-171.0.dev <4.0.0'
-
+  
 # Dependencies specify other packages that your package needs in order to work.
 # To automatically upgrade your package dependencies to the latest versions
 # consider running `flutter pub upgrade --major-versions`. Alternatively,
@@ -30,7 +30,7 @@ environment:
 dependencies:
   flutter:
     sdk: flutter
-  dropdown_button2: ^2.3.8
+  dropdown_button2: ^2.3.9
 
 
   # The following adds the Cupertino Icons font to your application.
