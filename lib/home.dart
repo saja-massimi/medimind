@@ -1,4 +1,3 @@
-
 import 'package:flutter/material.dart';
 import 'package:medi_mind/addMed.dart';
 import 'package:medi_mind/data/dummyData.dart';
@@ -6,8 +5,8 @@ import 'package:medi_mind/widgets/pill_grid_item.dart';
 
 
 class Home extends StatelessWidget {
-  const Home({super.key});
-  
+   Home({super.key});
+ 
   @override
   Widget build(BuildContext context) {
 
@@ -20,24 +19,17 @@ class Home extends StatelessWidget {
         title: const Text('Pill Reminder'), 
   
       ),
-      body: Container(
-         
-        child: GridView(
-          
-          padding: const EdgeInsets.fromLTRB(0, 20, 0, 20),
-          
-          gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
-          crossAxisCount: 1
-          
-          ),
-         
-          children: [
-            for(final pill in availablePills)
-            PillGridItem(Pills:pill ),
-            
-          ],
+      
+      body: Center(
+      child: Column(
+        mainAxisAlignment: MainAxisAlignment.center,
+        children: [
+        Expanded(child: PillsList(pill_list: availablePills)),
+        
+        ],
           ),
       ),
+
       floatingActionButton:   FloatingActionButton(
                   onPressed: () {
                     Navigator.push(context,
@@ -53,3 +45,4 @@ class Home extends StatelessWidget {
     );
   }
 }
+

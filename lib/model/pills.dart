@@ -1,8 +1,15 @@
-class pills{
- final int id;
-  final String pillName;
+import 'package:uuid/uuid.dart';
+import 'package:intl/intl.dart';
 
-  pills({required this.id, required this.pillName});
+const uuid= Uuid();
+class pills{
+final String id;
+final String pillName;
+final  formatter=DateFormat().add_jm().format(DateTime.now());
+
+
+pills( 
+ {required this.pillName}):id = uuid.v4();
 
 
 
