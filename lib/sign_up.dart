@@ -1,7 +1,9 @@
+import 'package:dropdown_button2/dropdown_button2.dart';
 import 'package:flutter/material.dart';
 import 'package:medi_mind/home.dart';
 
-enum Gender { Female, Male }
+final List<String> Gender = ['female', 'male', 'prefer not to say'];
+String? selectedValue;
 
 // ignore: camel_case_types
 class sign_up extends StatefulWidget {
@@ -54,23 +56,37 @@ class _Sign_up extends State<sign_up> {
             ),
             Row(
               children: [
-                const SizedBox(height: 100),
+                const SizedBox(height: 70),
                 const Text(
                   'Gender',
                   style: TextStyle(color: Colors.white),
                 ),
-                DropdownButton(
-                    items: Gender.values
-                        .map(
-                          (gender) => DropdownMenuItem(
-                            value: gender,
-                            child: Text(
-                              gender.name.toString(),
-                            ),
-                          ),
-                        )
-                        .toList(),
-                    onChanged: (value) {}),
+                DropdownButton2(
+                  items: Gender.map(
+                    (String gender) => DropdownMenuItem<String>(
+                      value: gender,
+                      child: Text(
+                        gender,
+                        style: const TextStyle(
+                            fontSize: 14, color: Color.fromARGB(255, 0, 0, 0)),
+                      ),
+                    ),
+                  ).toList(),
+                  value: selectedValue,
+                  onChanged: (String? value) {
+                    setState(() {
+                      selectedValue = value;
+                    });
+                  },
+                  buttonStyleData: const ButtonStyleData(
+                    padding: EdgeInsets.symmetric(horizontal: 16),
+                    height: 40,
+                    width: 170,
+                  ),
+                  menuItemStyleData: const MenuItemStyleData(
+                    height: 40,
+                  ),
+                ),
               ],
             ),
             const SizedBox(height: 20.0),
