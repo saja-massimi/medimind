@@ -2,6 +2,7 @@
 import 'package:dropdown_button2/dropdown_button2.dart';
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
+import 'package:medi_mind/model/pills.dart';
 
 final List<String> Timely = ['Day', 'Month', 'Year'];
 String? selectedValue;
@@ -25,7 +26,12 @@ List<String> uniqueList =
 String? selectedValue1;
 
 class addMed extends StatefulWidget {
-  const addMed({super.key});
+  const addMed({super.key, required this.onAddPill});
+
+
+final void Function(pills pill ) onAddPill;
+
+
 
   @override
   State<addMed> createState() => _addMedState();
@@ -34,6 +40,7 @@ class addMed extends StatefulWidget {
 class _addMedState extends State<addMed> {
 //DateTime? _selectedDate;
 //DateTime? _lastSelectedDate; 
+final TextEditingController _medNameController = TextEditingController();
 final formatter = DateFormat().add_yMd();
 
   @override
@@ -49,8 +56,9 @@ final formatter = DateFormat().add_yMd();
         child: Column(
           children: [
             const SizedBox(height: 10),
-            const TextField(
-              decoration: InputDecoration(
+             TextField(
+              controller: _medNameController,
+              decoration: const InputDecoration(
                 labelText: 'Medicine Name',
                 labelStyle: TextStyle(color: Colors.white),
               ),
@@ -162,6 +170,7 @@ final formatter = DateFormat().add_yMd();
                 ),
                 ElevatedButton(
                     onPressed: () {
+                      widget.onAddPill(pills(pillName: _medNameController.text));
                       Navigator.pop(context);
                     },
                     child: const Text('save'))

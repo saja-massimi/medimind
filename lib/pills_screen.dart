@@ -20,8 +20,10 @@ class _PillsScreenState extends State<PillsScreen> {
   @override
   Widget build(BuildContext context) {
     return   InkWell(
-      onTap: (){ Navigator.push(context,
-                    MaterialPageRoute(builder: (context) =>  const eachPill()));
+      
+      onTap: (){ 
+        Navigator.push(context,
+                    MaterialPageRoute(builder: (context) =>   eachPill(pillItem: widget.Pill_item)));
       },
       child: Card(
           child: Padding(

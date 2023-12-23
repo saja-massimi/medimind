@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-
 import 'package:medi_mind/signin_page.dart';
 
 void main() {
