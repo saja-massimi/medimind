@@ -1,4 +1,3 @@
-
 import 'package:dropdown_button2/dropdown_button2.dart';
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
@@ -33,8 +32,8 @@ class addMed extends StatefulWidget {
 
 class _addMedState extends State<addMed> {
 //DateTime? _selectedDate;
-//DateTime? _lastSelectedDate; 
-final formatter = DateFormat().add_yMd();
+//DateTime? _lastSelectedDate;
+  final formatter = DateFormat().add_yMd();
 
   @override
   Widget build(BuildContext context) {
