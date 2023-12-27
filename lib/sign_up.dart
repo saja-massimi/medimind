@@ -2,7 +2,7 @@ import 'package:dropdown_button2/dropdown_button2.dart';
 import 'package:flutter/material.dart';
 import 'package:medi_mind/home.dart';
 
-final List<String> Gender = ['female', 'male', 'prefer not to say'];
+final List<String> Gender = ['Female', 'Male'];
 String? selectedValue;
 
 // ignore: camel_case_types
