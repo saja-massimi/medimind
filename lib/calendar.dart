@@ -17,6 +17,15 @@ class _CalendarPageState extends State<CalendarPage> {
   late DateTime _focusedDay;
   late DateTime _selectedDay;
 
+  // Define a list of colors for pills
+  List<Color> pillColors = [
+    Color.fromARGB(255, 212, 243, 33),
+    Color.fromARGB(255, 233, 13, 13),
+    Color.fromARGB(255, 3, 131, 15),
+
+    // Add more colors as needed
+  ];
+
   @override
   void initState() {
     super.initState();
@@ -73,6 +82,8 @@ class _CalendarPageState extends State<CalendarPage> {
               itemBuilder: (context, index) {
                 return ListTile(
                   title: Text(widget.pillsList[index].pillName),
+                  // Set the color for each pill based on the index
+                  tileColor: pillColors[index % pillColors.length],
                   // Add more information as needed
                 );
               },
