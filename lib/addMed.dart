@@ -1,6 +1,7 @@
 import 'package:dropdown_button2/dropdown_button2.dart';
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
+import 'package:medi_mind/model/pills.dart';
 
 final List<String> Timely = ['Day', 'Month', 'Year'];
 String? selectedValue;
@@ -24,16 +25,18 @@ List<String> uniqueList =
 String? selectedValue1;
 
 class addMed extends StatefulWidget {
-  const addMed({super.key});
+  const addMed({Key? key, required this.onAddPill});
+
+  final void Function(pills pill) onAddPill;
 
   @override
   State<addMed> createState() => _addMedState();
 }
 
 class _addMedState extends State<addMed> {
-//DateTime? _selectedDate;
-//DateTime? _lastSelectedDate;
+  final TextEditingController _medNameController = TextEditingController();
   final formatter = DateFormat().add_yMd();
+  TimeOfDay? _selectedTime;
 
   @override
   Widget build(BuildContext context) {
@@ -48,16 +51,17 @@ class _addMedState extends State<addMed> {
         child: Column(
           children: [
             const SizedBox(height: 10),
-            const TextField(
-              decoration: InputDecoration(
+            TextField(
+              controller: _medNameController,
+              decoration: const InputDecoration(
                 labelText: 'Medicine Name',
                 labelStyle: TextStyle(color: Colors.white),
               ),
             ),
             const SizedBox(height: 20),
-            const TextField(
+            TextField(
               keyboardType: TextInputType.number,
-              decoration: InputDecoration(
+              decoration: const InputDecoration(
                 labelText: "Enter daily dose",
                 labelStyle: TextStyle(color: Colors.white),
               ),
@@ -70,26 +74,34 @@ class _addMedState extends State<addMed> {
                   style: TextStyle(color: Colors.white),
                 ),
                 IconButton(
-                    onPressed: () {
-                      showDatePicker(
-                              context: context,
-                              firstDate: DateTime.now(),
-                              lastDate: DateTime(2035),
-                              initialDate: DateTime(2024))
-                          .then((value) => null);
-                    },
-                    icon: const Icon(Icons.calendar_month)),
-                const SizedBox(width: 10),
-                const Text('End Date', style: TextStyle(color: Colors.white)),
-                IconButton(
                   onPressed: () {
                     showDatePicker(
-                        context: context,
-                        firstDate: DateTime.now(),
-                        lastDate: DateTime(2027),
-                        initialDate: DateTime(2024));
+                      context: context,
+                      firstDate: DateTime.now(),
+                      lastDate: DateTime(2035),
+                      initialDate: DateTime(2024),
+                    ).then((value) => null);
                   },
                   icon: const Icon(Icons.calendar_month),
+                ),
+                const SizedBox(width: 10),
+                const Text(
+                  'Time',
+                  style: TextStyle(color: Colors.white),
+                ),
+                IconButton(
+                  onPressed: () async {
+                    final selectedTime = await showTimePicker(
+                      context: context,
+                      initialTime: TimeOfDay.now(),
+                    );
+                    if (selectedTime != null) {
+                      setState(() {
+                        _selectedTime = selectedTime;
+                      });
+                    }
+                  },
+                  icon: const Icon(Icons.access_time),
                 ),
               ],
             ),
@@ -160,10 +172,12 @@ class _addMedState extends State<addMed> {
                   ),
                 ),
                 ElevatedButton(
-                    onPressed: () {
-                      Navigator.pop(context);
-                    },
-                    child: const Text('save'))
+                  onPressed: () {
+                    widget.onAddPill(pills(pillName: _medNameController.text));
+                    Navigator.pop(context);
+                  },
+                  child: const Text('save'),
+                ),
               ],
             )
           ],

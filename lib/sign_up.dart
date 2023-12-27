@@ -2,7 +2,7 @@ import 'package:dropdown_button2/dropdown_button2.dart';
 import 'package:flutter/material.dart';
 import 'package:medi_mind/home.dart';
 
-final List<String> Gender = ['female', 'male', 'prefer not to say'];
+final List<String> Gender = ['female', 'male'];
 String? selectedValue;
 
 // ignore: camel_case_types
@@ -13,7 +13,6 @@ class sign_up extends StatefulWidget {
   _Sign_up createState() => _Sign_up();
 }
 
-// ignore: camel_case_types
 class _Sign_up extends State<sign_up> {
   final TextEditingController _usernameController = TextEditingController();
   final TextEditingController _passwordController = TextEditingController();
@@ -92,15 +91,12 @@ class _Sign_up extends State<sign_up> {
             const SizedBox(height: 20.0),
             OutlinedButton(
               onPressed: () {
-                // Implement sign-up logic here
                 String email = _usernameController.text;
                 String password = _passwordController.text;
-                // ignore: non_constant_identifier_names
                 String phone_number = _phoneController.text;
-                 Navigator.push(context,
-                    MaterialPageRoute(builder: (context) => Home()));
-                // Perform sign-up operations
-                // ignore: avoid_print
+                Navigator.push(
+                    context, MaterialPageRoute(builder: (context) => Home()));
+
                 print(
                     'Signing up with email: $email and password: $password and phone number: $phone_number');
               },
