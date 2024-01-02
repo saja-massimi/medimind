@@ -1,50 +1,46 @@
 import 'package:dropdown_button2/dropdown_button2.dart';
 import 'package:flutter/material.dart';
 import 'package:medi_mind/home.dart';
+import 'package:medi_mind/sign_up.dart';
 
-final List<String> Gender = ['female', 'male'];
-String? selectedValue;
-
-// ignore: camel_case_types
-class sign_up extends StatefulWidget {
-  const sign_up({super.key});
-
-
-
+class Profile extends StatefulWidget {
+ const  Profile({super.key});
 
   @override
-  // ignore: library_private_types_in_public_api
-  _Sign_up createState() => _Sign_up();
+  State<Profile> createState() => _ProfileState();
 }
 
-class _Sign_up extends State<sign_up> {
-  final TextEditingController _usernameController = TextEditingController();
-  final TextEditingController _passwordController = TextEditingController();
-  final TextEditingController _phoneController = TextEditingController();
+class _ProfileState extends State<Profile> {
+  final TextEditingController _usernameController1 = TextEditingController();
+  final TextEditingController _passwordController1 = TextEditingController();
+  final TextEditingController _phoneController1 = TextEditingController();
+  
 
+  late String username;
+  late String password ;
+  late String phone_number ;
+  
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       backgroundColor: Colors.brown,
-      appBar: AppBar(
-        backgroundColor: Colors.brown,
-        title: const Text('Sign Up',
-            style: TextStyle(color: Color.fromARGB(255, 255, 255, 255))),
-      ),
-      body: Padding(
+appBar: AppBar(title: const Text('Your Profile'),backgroundColor: Colors.brown,),
+
+body: Padding(
         padding: const EdgeInsets.all(16.0),
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
             TextField(
-              controller: _usernameController,
+              controller: _usernameController1,
               decoration: const InputDecoration(
                   labelText: 'Username',
                   labelStyle: TextStyle(color: Colors.white)),
+             
             ),
             const SizedBox(height: 16.0),
             TextField(
-              controller: _passwordController,
+              controller: _passwordController1,
               decoration: const InputDecoration(
                   labelText: 'Password',
                   labelStyle: TextStyle(color: Colors.white)),
@@ -52,7 +48,7 @@ class _Sign_up extends State<sign_up> {
             ),
             const SizedBox(height: 16.0),
             TextField(
-              controller: _phoneController,
+              controller: _phoneController1,
               decoration: const InputDecoration(
                   labelText: 'Phone Number',
                   labelStyle: TextStyle(color: Colors.white)),
@@ -95,16 +91,14 @@ class _Sign_up extends State<sign_up> {
             const SizedBox(height: 20.0),
             OutlinedButton(
               onPressed: () {
-                String name = _usernameController.text;
-                String password = _passwordController.text;
-                String phone_number = _phoneController.text;
-
-                Navigator.push(context, MaterialPageRoute(builder: (context) => Home()));
-
-      
+                 username = _usernameController1.text;
+                 password = _passwordController1.text;
+                 phone_number = _phoneController1.text;
+                Navigator.push(
+                    context, MaterialPageRoute(builder: (context) => Home()));
               },
               child: const Text(
-                'Sign Up',
+                'Save Changes',
                 style: TextStyle(color: Color.fromARGB(255, 255, 255, 255)),
               ),
             ),

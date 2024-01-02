@@ -22,15 +22,15 @@ class PillsList extends StatelessWidget {
                 itemBuilder: (context, index) => Dismissible(
                   key: ValueKey(pill_list[index]),
                   onDismissed: (direction) => onRemovePill(pill_list[index]),
-                  child: PillsScreen(
-                      title: pill_list[index].pillName,
-                      Pill_item: pill_list[index]),
                   background: Container(
                     color: Colors.red,
                     alignment: Alignment.centerRight,
                     padding: const EdgeInsets.symmetric(horizontal: 20.0),
                     child: const Icon(Icons.delete, color: Colors.white),
                   ),
+                  child: PillsScreen(
+                      title: pill_list[index].pillName,
+                      Pill_item: pill_list[index]),
                 ),
                 itemCount: availablePills.length,
               ));

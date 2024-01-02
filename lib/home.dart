@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:medi_mind/UserProfile.dart';
 import 'package:medi_mind/addMed.dart';
 import 'package:medi_mind/calendar.dart';
 import 'package:medi_mind/data/dummyData.dart';
@@ -28,6 +29,24 @@ class _HomeState extends State<Home> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      drawer: Drawer(
+child: ListView( 
+ padding: EdgeInsets.zero,
+children: [
+  ListTile(
+   leading: const Icon(Icons.person),
+   title: const Text('Your Profile'),
+    onTap:(){ Navigator.push(
+            context,
+            MaterialPageRoute(
+                builder: (context) => const Profile()));
+                
+                
+                } ,)
+],
+),
+
+      ),
         backgroundColor: Colors.brown,
         appBar: AppBar(
           backgroundColor: Colors.brown,

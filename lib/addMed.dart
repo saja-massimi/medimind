@@ -25,8 +25,8 @@ List<String> uniqueList =
 String? selectedValue1;
 
 class addMed extends StatefulWidget {
-  const addMed({Key? key, required this.onAddPill});
 
+  const addMed({Key? key, required this.onAddPill});
   final void Function(pills pill) onAddPill;
 
   @override
@@ -34,6 +34,7 @@ class addMed extends StatefulWidget {
 }
 
 class _addMedState extends State<addMed> {
+
   final TextEditingController _medNameController = TextEditingController();
   final formatter = DateFormat().add_yMd();
   TimeOfDay? _selectedTime;
@@ -59,9 +60,9 @@ class _addMedState extends State<addMed> {
               ),
             ),
             const SizedBox(height: 20),
-            TextField(
+            const TextField(
               keyboardType: TextInputType.number,
-              decoration: const InputDecoration(
+              decoration: InputDecoration(
                 labelText: "Enter daily dose",
                 labelStyle: TextStyle(color: Colors.white),
               ),
@@ -108,7 +109,25 @@ class _addMedState extends State<addMed> {
             Row(
               children: [
                 const SizedBox(height: 70),
+                
                 const Text(
+                  'Repeat',
+                  style: TextStyle(color: Colors.white),
+                ),
+                DropdownButton2(
+                  items: Numbers.map(
+                    (String numbers) => DropdownMenuItem(
+                      value: numbers,
+                      child: Text(numbers),
+                    ),
+                  ).toList(),
+                  value: selectedValue1,
+                  onChanged: (String? value) {
+                    setState(() {
+                      selectedValue1 = value;
+                    });
+                  },
+                ),const Text(
                   'Times a',
                   style: TextStyle(color: Colors.white),
                 ),
@@ -139,24 +158,6 @@ class _addMedState extends State<addMed> {
                     height: 40,
                   ),
                 ),
-                const Text(
-                  ' Repeat ',
-                  style: TextStyle(color: Colors.white),
-                ),
-                DropdownButton2(
-                  items: Numbers.map(
-                    (String numbers) => DropdownMenuItem(
-                      value: numbers,
-                      child: Text(numbers),
-                    ),
-                  ).toList(),
-                  value: selectedValue1,
-                  onChanged: (String? value) {
-                    setState(() {
-                      selectedValue1 = value;
-                    });
-                  },
-                ),
               ],
             ),
             Row(
@@ -166,17 +167,19 @@ class _addMedState extends State<addMed> {
                   onPressed: () {
                     Navigator.pop(context);
                   },
+
+  
                   child: const Text(
-                    'cancel',
+                    'Cancel',
                     style: TextStyle(color: Colors.white),
                   ),
                 ),
                 ElevatedButton(
                   onPressed: () {
-                    widget.onAddPill(pills(pillName: _medNameController.text));
+                    widget.onAddPill(pills(pillName: _medNameController.text,formatter: _selectedTime!));
                     Navigator.pop(context);
                   },
-                  child: const Text('save'),
+                  child: const Text('Save'),
                 ),
               ],
             )

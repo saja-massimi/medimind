@@ -66,7 +66,7 @@ class _Sign_in extends State<Sign_In> {
               },
               style: OutlinedButton.styleFrom(
                   foregroundColor: Color.fromARGB(255, 255, 255, 255)),
-              child: Text('Sign in'),
+              child: const Text('Sign in'),
             ),
             const SizedBox(height: 20),
             OutlinedButton(
@@ -76,7 +76,7 @@ class _Sign_in extends State<Sign_In> {
               },
               style: OutlinedButton.styleFrom(
                   foregroundColor: Color.fromARGB(255, 255, 255, 255)),
-              child: Text('sign up'),
+              child: const Text('Sign up'),
             ),
           ],
         ),

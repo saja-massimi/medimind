@@ -20,11 +20,11 @@ class _PillsScreenState extends State<PillsScreen> {
         Navigator.push(
             context,
             MaterialPageRoute(
-                builder: (context) => eachPill(pillItem: widget.Pill_item)));
+                builder: (context) => eachPill(pillItem: widget.Pill_item, onEditPill: (pills pill) {  },)));
       },
       child: Card(
         child: Padding(
-          padding: EdgeInsets.fromLTRB(5, 10, 15, 10),
+          padding:const EdgeInsets.fromLTRB(5, 10, 15, 10),
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
@@ -34,7 +34,7 @@ class _PillsScreenState extends State<PillsScreen> {
               ),
               Row(
                 children: [
-                  Text(widget.Pill_item.formatter),
+                  Text(widget.Pill_item.formatter.format(context)),
                   const Spacer(),
                   Checkbox(
                       value: ischecked,
