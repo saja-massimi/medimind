@@ -1,19 +1,20 @@
-import 'package:dropdown_button2/dropdown_button2.dart';
 import 'package:flutter/material.dart';
+import 'dart:convert';
+import 'package:http/http.dart' as http;
 import 'package:medi_mind/home.dart';
+import 'package:medi_mind/signin_page.dart';
 
 final List<String> Gender = ['female', 'male'];
 String? selectedValue;
 
-// ignore: camel_case_types
-class sign_up extends StatefulWidget {
-  const sign_up({super.key});
+class SignUp extends StatefulWidget {
+  const SignUp({Key? key}) : super(key: key);
+
   @override
-  // ignore: library_private_types_in_public_api
-  _Sign_up createState() => _Sign_up();
+  _SignUp createState() => _SignUp();
 }
 
-class _Sign_up extends State<sign_up> {
+class _SignUp extends State<SignUp> {
   final TextEditingController _usernameController = TextEditingController();
   final TextEditingController _passwordController = TextEditingController();
   final TextEditingController _phoneController = TextEditingController();
@@ -24,8 +25,7 @@ class _Sign_up extends State<sign_up> {
       backgroundColor: Colors.brown,
       appBar: AppBar(
         backgroundColor: Colors.brown,
-        title: const Text('Sign Up',
-            style: TextStyle(color: Color.fromARGB(255, 255, 255, 255))),
+        title: const Text('Sign Up', style: TextStyle(color: Colors.white)),
       ),
       body: Padding(
         padding: const EdgeInsets.all(16.0),
@@ -35,39 +35,40 @@ class _Sign_up extends State<sign_up> {
             TextField(
               controller: _usernameController,
               decoration: const InputDecoration(
-                  labelText: 'Username',
-                  labelStyle: TextStyle(color: Colors.white)),
+                labelText: 'Username',
+                labelStyle: TextStyle(color: Colors.white),
+              ),
             ),
             const SizedBox(height: 16.0),
             TextField(
               controller: _passwordController,
               decoration: const InputDecoration(
-                  labelText: 'Password',
-                  labelStyle: TextStyle(color: Colors.white)),
+                labelText: 'Password',
+                labelStyle: TextStyle(color: Colors.white),
+              ),
               obscureText: true,
             ),
             const SizedBox(height: 16.0),
             TextField(
               controller: _phoneController,
               decoration: const InputDecoration(
-                  labelText: 'Phone Number',
-                  labelStyle: TextStyle(color: Colors.white)),
+                labelText: 'Phone Number',
+                labelStyle: TextStyle(color: Colors.white),
+              ),
             ),
+            const SizedBox(height: 16.0),
             Row(
               children: [
-                const SizedBox(height: 70),
-                const Text(
-                  'Gender',
-                  style: TextStyle(color: Colors.white),
-                ),
-                DropdownButton2(
+                const Text('Gender', style: TextStyle(color: Colors.white)),
+                const SizedBox(width: 16.0),
+                DropdownButton<String>(
                   items: Gender.map(
                     (String gender) => DropdownMenuItem<String>(
                       value: gender,
                       child: Text(
                         gender,
-                        style: const TextStyle(
-                            fontSize: 14, color: Color.fromARGB(255, 0, 0, 0)),
+                        style:
+                            const TextStyle(fontSize: 14, color: Colors.black),
                       ),
                     ),
                   ).toList(),
@@ -77,43 +78,52 @@ class _Sign_up extends State<sign_up> {
                       selectedValue = value;
                     });
                   },
-                  buttonStyleData: const ButtonStyleData(
-                    padding: EdgeInsets.symmetric(horizontal: 16),
-                    height: 40,
-                    width: 170,
-                  ),
-                  menuItemStyleData: const MenuItemStyleData(
-                    height: 40,
-                  ),
                 ),
               ],
             ),
             const SizedBox(height: 20.0),
-            OutlinedButton(
-              onPressed: () {
-                String email = _usernameController.text;
+            ElevatedButton(
+              onPressed: () async {
+                String username = _usernameController.text;
                 String password = _passwordController.text;
-                String phone_number = _phoneController.text;
-                Navigator.push(
-                    context, MaterialPageRoute(builder: (context) => Home()));
+                String phoneNumber = _phoneController.text;
 
-                print(
-                    'Signing up with email: $email and password: $password and phone number: $phone_number');
+                final response = await http.post(
+                  Uri.parse('http://localhost/Medimind/sign_up.php'),
+                  headers: {'Content-Type': 'application/json'},
+                  body: jsonEncode({
+                    'username': username,
+                    'password': password,
+                    'phone_number': phoneNumber,
+                    'gender': selectedValue,
+                  }),
+                );
+
+                if (response.statusCode == 200) {
+                  final result = jsonDecode(response.body);
+                  if (result['status'] == 'success') {
+                    print('User signed up successfully');
+                    Navigator.push(context,
+                        MaterialPageRoute(builder: (context) => Home()));
+                  } else {
+                    print('Error: ${result['message']}');
+                  }
+                } else {
+                  print(
+                      'HTTP Request failed with status ${response.statusCode}');
+                }
               },
-              child: const Text(
-                'Sign Up',
-                style: TextStyle(color: Color.fromARGB(255, 255, 255, 255)),
-              ),
+              child: const Text('Sign Up',
+                  style: TextStyle(color: Color.fromARGB(255, 95, 94, 94))),
             ),
             const SizedBox(height: 12.0),
-            OutlinedButton(
-                onPressed: () {
-                  Navigator.pop(context);
-                },
-                child: const Text(
-                  'Go back',
-                  style: TextStyle(color: Color.fromARGB(255, 255, 255, 255)),
-                ))
+            TextButton(
+              onPressed: () {
+                Navigator.pop(context);
+              },
+              child:
+                  const Text('Go back', style: TextStyle(color: Colors.white)),
+            ),
           ],
         ),
       ),
