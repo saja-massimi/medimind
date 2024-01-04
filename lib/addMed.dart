@@ -25,7 +25,6 @@ List<String> uniqueList =
 String? selectedValue1;
 
 class addMed extends StatefulWidget {
-
   const addMed({Key? key, required this.onAddPill});
   final void Function(pills pill) onAddPill;
 
@@ -34,7 +33,6 @@ class addMed extends StatefulWidget {
 }
 
 class _addMedState extends State<addMed> {
-
   final TextEditingController _medNameController = TextEditingController();
   final formatter = DateFormat().add_yMd();
   TimeOfDay? _selectedTime;
@@ -109,7 +107,6 @@ class _addMedState extends State<addMed> {
             Row(
               children: [
                 const SizedBox(height: 70),
-                
                 const Text(
                   'Repeat',
                   style: TextStyle(color: Colors.white),
@@ -127,7 +124,8 @@ class _addMedState extends State<addMed> {
                       selectedValue1 = value;
                     });
                   },
-                ),const Text(
+                ),
+                const Text(
                   'Times a',
                   style: TextStyle(color: Colors.white),
                 ),
@@ -167,8 +165,6 @@ class _addMedState extends State<addMed> {
                   onPressed: () {
                     Navigator.pop(context);
                   },
-
-  
                   child: const Text(
                     'Cancel',
                     style: TextStyle(color: Colors.white),
@@ -176,7 +172,11 @@ class _addMedState extends State<addMed> {
                 ),
                 ElevatedButton(
                   onPressed: () {
-                    widget.onAddPill(pills(pillName: _medNameController.text,formatter: _selectedTime!));
+                    widget.onAddPill(pills(
+                        pillName: _medNameController.text,
+                        formatter: _selectedTime!,
+                        date: DateTime(2024),
+                        isTaken: false));
                     Navigator.pop(context);
                   },
                   child: const Text('Save'),
