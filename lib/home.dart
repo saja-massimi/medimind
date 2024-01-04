@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:medi_mind/UserProfile.dart';
 import 'package:medi_mind/addMed.dart';
 import 'package:medi_mind/calendar.dart';
+import 'package:medi_mind/charts.dart';
 import 'package:medi_mind/data/dummyData.dart';
 import 'package:medi_mind/model/pills.dart';
 import 'package:medi_mind/widgets/pill_grid_item.dart';
@@ -29,24 +30,21 @@ class _HomeState extends State<Home> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      drawer: Drawer(
-child: ListView( 
- padding: EdgeInsets.zero,
-children: [
-  ListTile(
-   leading: const Icon(Icons.person),
-   title: const Text('Your Profile'),
-    onTap:(){ Navigator.push(
-            context,
-            MaterialPageRoute(
-                builder: (context) => const Profile()));
-                
-                
-                } ,)
-],
-),
-
-      ),
+        drawer: Drawer(
+          child: ListView(
+            padding: EdgeInsets.zero,
+            children: [
+              ListTile(
+                leading: const Icon(Icons.person),
+                title: const Text('Your Profile'),
+                onTap: () {
+                  Navigator.push(context,
+                      MaterialPageRoute(builder: (context) => const Profile()));
+                },
+              )
+            ],
+          ),
+        ),
         backgroundColor: Colors.brown,
         appBar: AppBar(
           backgroundColor: Colors.brown,
@@ -96,6 +94,19 @@ children: [
               foregroundColor: Colors.white,
               hoverColor: Colors.blue.shade800,
               child: const Icon(Icons.calendar_today),
+            ),
+            const SizedBox(height: 16),
+            FloatingActionButton(
+              onPressed: () {
+                Navigator.push(
+                    context,
+                    MaterialPageRoute(
+                        builder: (context) => Charts(availablePills)));
+              },
+              backgroundColor: Colors.blue,
+              foregroundColor: Colors.white,
+              hoverColor: Colors.blue.shade800,
+              child: const Icon(Icons.add_chart),
             ),
           ],
         ));

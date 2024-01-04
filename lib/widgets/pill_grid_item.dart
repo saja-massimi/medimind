@@ -29,8 +29,11 @@ class PillsList extends StatelessWidget {
                     child: const Icon(Icons.delete, color: Colors.white),
                   ),
                   child: PillsScreen(
-                      title: pill_list[index].pillName,
-                      Pill_item: pill_list[index]),
+                    title: pill_list[index].pillName,
+                    pillItem: pill_list[index],
+                    isTaken: false,
+                    pillColor: Color.fromARGB(221, 255, 255, 255),
+                  ),
                 ),
                 itemCount: availablePills.length,
               ));

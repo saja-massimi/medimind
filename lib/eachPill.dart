@@ -7,15 +7,14 @@ import 'package:medi_mind/model/pills.dart';
 class eachPill extends StatefulWidget {
   const eachPill({super.key, required this.pillItem, required this.onEditPill});
 
-final void Function(pills pill) onEditPill;
-final pills pillItem;
+  final void Function(pills pill) onEditPill;
+  final pills pillItem;
 
   @override
   State<eachPill> createState() => _eachPillState();
 }
 
 class _eachPillState extends State<eachPill> {
-//Add the information of the pills in each controller
   final TextEditingController _medNameController = TextEditingController();
   final formatter = DateFormat().add_yMd();
   TimeOfDay? _selectedTime;
@@ -23,9 +22,11 @@ class _eachPillState extends State<eachPill> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-appBar: AppBar(title: Text(widget.pillItem.pillName), backgroundColor: Colors.brown,),
-body:
-Container(
+      appBar: AppBar(
+        title: Text(widget.pillItem.pillName),
+        backgroundColor: Colors.brown,
+      ),
+      body: Container(
         padding: const EdgeInsets.all(20),
         child: Column(
           children: [
@@ -87,7 +88,6 @@ Container(
             Row(
               children: [
                 const SizedBox(height: 70),
-                
                 const Text(
                   ' Repeat ',
                   style: TextStyle(color: Colors.white),
@@ -105,7 +105,8 @@ Container(
                       selectedValue1 = value;
                     });
                   },
-                ),const Text(
+                ),
+                const Text(
                   'Times a',
                   style: TextStyle(color: Colors.white),
                 ),
@@ -141,14 +142,10 @@ Container(
             Row(
               children: [
                 const SizedBox(width: 100),
-                
                 TextButton(
                   onPressed: () {
                     Navigator.pop(context);
                   },
-
-            
-                  
                   child: const Text(
                     'Cancel',
                     style: TextStyle(color: Colors.white),
@@ -156,7 +153,11 @@ Container(
                 ),
                 ElevatedButton(
                   onPressed: () {
-                    widget.onEditPill(pills(pillName: _medNameController.text,formatter: _selectedTime!));
+                    widget.onEditPill(pills(
+                        pillName: _medNameController.text,
+                        formatter: _selectedTime!,
+                        date: DateTime(2024),
+                        isTaken: false));
                     Navigator.pop(context);
                   },
                   child: const Text('Save Changes'),

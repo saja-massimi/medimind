@@ -3,46 +3,66 @@ import 'package:medi_mind/eachPill.dart';
 import '../model/pills.dart';
 
 class PillsScreen extends StatefulWidget {
-  const PillsScreen({super.key, required this.title, required this.Pill_item});
+  const PillsScreen({
+    Key? key,
+    required this.title,
+    required this.pillItem,
+    required this.isTaken,
+    required this.pillColor,
+  }) : super(key: key);
+
   final String title;
-  final pills Pill_item;
+  final pills pillItem;
+  final bool isTaken;
+  final Color pillColor;
 
   @override
   State<PillsScreen> createState() => _PillsScreenState();
 }
 
 class _PillsScreenState extends State<PillsScreen> {
-  bool ischecked = false;
+  bool isTaken = false;
+  @override
+  void initState() {
+    super.initState();
+    isTaken = widget.isTaken;
+  }
+
   @override
   Widget build(BuildContext context) {
     return InkWell(
       onTap: () {
         Navigator.push(
-            context,
-            MaterialPageRoute(
-                builder: (context) => eachPill(pillItem: widget.Pill_item, onEditPill: (pills pill) {  },)));
+          context,
+          MaterialPageRoute(
+            builder: (context) => eachPill(
+                pillItem: widget.pillItem, onEditPill: (pills pill) {}),
+          ),
+        );
       },
       child: Card(
+        color: widget.pillColor,
         child: Padding(
-          padding:const EdgeInsets.fromLTRB(5, 10, 15, 10),
+          padding: const EdgeInsets.fromLTRB(5, 10, 15, 10),
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              Text(widget.Pill_item.pillName),
+              Text(widget.pillItem.pillName),
               const SizedBox(
                 height: 4,
               ),
               Row(
                 children: [
-                  Text(widget.Pill_item.formatter.format(context)),
+                  Text(widget.pillItem.formatter.format(context)),
                   const Spacer(),
                   Checkbox(
-                      value: ischecked,
-                      onChanged: (bool? flag) {
-                        setState(() {
-                          ischecked = flag!;
-                        });
-                      })
+                    value: isTaken,
+                    onChanged: (bool? flag) {
+                      setState(() {
+                        isTaken = flag!;
+                      });
+                    },
+                  )
                 ],
               )
             ],
