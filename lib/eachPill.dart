@@ -22,6 +22,7 @@ class _eachPillState extends State<eachPill> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      backgroundColor: Colors.brown,
       appBar: AppBar(
         title: Text(widget.pillItem.pillName),
         backgroundColor: Colors.brown,
