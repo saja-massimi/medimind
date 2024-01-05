@@ -17,7 +17,6 @@ class _CalendarPageState extends State<CalendarPage> {
   late DateTime _focusedDay;
   late DateTime _selectedDay;
 
-  // Define a list of colors for pills
   List<Color> pillColors = [
     const Color.fromARGB(255, 212, 243, 33),
     const Color.fromARGB(255, 3, 131, 15),

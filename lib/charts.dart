@@ -11,7 +11,7 @@ class Charts extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text('Bar Chart Page'),
+        title: Text('Bar Charts'),
         backgroundColor: Colors.brown,
       ),
       body: Container(
