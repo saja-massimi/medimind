@@ -15,8 +15,7 @@ class Charts extends StatelessWidget {
         backgroundColor: Colors.brown,
       ),
       body: Container(
-        // Wrap the Scaffold with Container for background color
-        color: Colors.brown.shade100, // Set your desired background color
+        color: Colors.brown.shade100,
         child: Padding(
           padding: const EdgeInsets.all(16.0),
           child: charts.BarChart(

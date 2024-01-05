@@ -19,10 +19,9 @@ class _CalendarPageState extends State<CalendarPage> {
 
   // Define a list of colors for pills
   List<Color> pillColors = [
-    Color.fromARGB(255, 212, 243, 33),
-    Color.fromARGB(255, 3, 131, 15),
-
-    // Add more colors as needed
+    const Color.fromARGB(255, 212, 243, 33),
+    const Color.fromARGB(255, 3, 131, 15),
+    Color.fromARGB(255, 103, 105, 103),
   ];
 
   @override
