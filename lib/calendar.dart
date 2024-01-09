@@ -1,12 +1,13 @@
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
+import 'package:medi_mind/pills_screen.dart';
 import 'package:table_calendar/table_calendar.dart';
 import 'package:medi_mind/model/pills.dart';
 
 class CalendarPage extends StatefulWidget {
-  final List<pills> pillsList;
+  List<pills> pillsList;
 
-  const CalendarPage({Key? key, required this.pillsList}) : super(key: key);
+   CalendarPage({Key? key, required this.pillsList}) : super(key: key);
 
   @override
   _CalendarPageState createState() => _CalendarPageState();
@@ -20,7 +21,7 @@ class _CalendarPageState extends State<CalendarPage> {
   List<Color> pillColors = [
     const Color.fromARGB(255, 212, 243, 33),
     const Color.fromARGB(255, 3, 131, 15),
-    Color.fromARGB(255, 103, 105, 103),
+    const Color.fromARGB(255, 103, 105, 103),
   ];
 
   @override
@@ -70,7 +71,7 @@ class _CalendarPageState extends State<CalendarPage> {
           const SizedBox(height: 16),
           Text(
             'Selected Day: ${DateFormat('yyyy-MM-dd').format(_selectedDay)}',
-            style: TextStyle(fontSize: 18),
+            style: const TextStyle(fontSize: 18),
           ),
           const SizedBox(height: 16),
           Expanded(
@@ -79,7 +80,8 @@ class _CalendarPageState extends State<CalendarPage> {
               itemBuilder: (context, index) {
                 return ListTile(
                   title: Text(widget.pillsList[index].pillName),
-                  tileColor: pillColors[index % pillColors.length],
+                  tileColor:widget.pillsList[index].isTaken? Colors.green: Colors.grey
+                  //pillColors[index % pillColors.length],
                 );
               },
             ),

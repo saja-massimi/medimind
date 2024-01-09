@@ -1,57 +1,66 @@
-import 'package:flutter/material.dart';
-import 'package:charts_flutter_new/flutter.dart' as charts;
-import 'package:medi_mind/model/pills.dart';
+/*import 'package:flutter/material.dart';
+import 'package:syncfusion_flutter_charts/charts.dart';
+ 
 
-class Charts extends StatelessWidget {
-  final List<pills> availablePills;
+class _ChartApp extends StatelessWidget {
+  @override
+  Widget build(BuildContext context) {
+    return MaterialApp(
+      theme: ThemeData(primarySwatch: Colors.blue),
+      home: _MyHomePage(),
+    );
+  }
+}
 
-  Charts(this.availablePills);
+class _MyHomePage extends StatefulWidget {
+  // ignore: prefer_const_constructors_in_immutables
+  _MyHomePage({Key? key}) : super(key: key);
 
+  @override
+  _MyHomePageState createState() => _MyHomePageState();
+}
+
+class _MyHomePageState extends State<_MyHomePage> {
+  late List<_ChartData> data;
+  late TooltipBehavior _tooltip;
+ 
+  @override
+  void initState() {
+    data = [
+      _ChartData('CHN', 12),
+      _ChartData('GER', 15),
+      _ChartData('RUS', 30),
+      _ChartData('BRZ', 6.4),
+      _ChartData('IND', 14)
+    ];
+    _tooltip = TooltipBehavior(enable: true);
+    super.initState();
+  }
+ 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-        title: Text('Bar Charts'),
-        backgroundColor: Colors.brown,
-      ),
-      body: Container(
-        color: Colors.brown.shade100,
-        child: Padding(
-          padding: const EdgeInsets.all(16.0),
-          child: charts.BarChart(
-            _createBarData(),
-            animate: true,
-          ),
+        appBar: AppBar(
+          title: const Text('Syncfusion Flutter chart'),
         ),
-      ),
-    );
-  }
-
-  List<charts.Series<OrdinalSales, String>> _createBarData() {
-    final Map<String, int> totalPills = {};
-
-    for (var pill in availablePills) {
-      totalPills['Total Pills'] = (totalPills['Total Pills'] ?? 0) + 1;
-    }
-
-    final List<OrdinalSales> data = totalPills.entries.map((entry) {
-      return OrdinalSales(entry.key, entry.value);
-    }).toList();
-
-    return [
-      charts.Series<OrdinalSales, String>(
-        id: 'Total Pills',
-        domainFn: (OrdinalSales sales, _) => sales.label,
-        measureFn: (OrdinalSales sales, _) => sales.count,
-        data: data,
-      )
-    ];
+        body: SfCartesianChart(
+            primaryXAxis: CategoryAxis(),
+            primaryYAxis: NumericAxis(minimum: 0, maximum: 40, interval: 10),
+            tooltipBehavior: _tooltip,
+            series: <CartesianSeries<_ChartData, String>>[
+              ColumnSeries<_ChartData, String>(
+                  dataSource: data,
+                  xValueMapper: (_ChartData data, _) => data.x,
+                  yValueMapper: (_ChartData data, _) => data.y,
+                  name: 'Gold',
+                  color: Color.fromRGBO(8, 142, 255, 1))
+            ]));
   }
 }
-
-class OrdinalSales {
-  final String label;
-  final int count;
-
-  OrdinalSales(this.label, this.count);
-}
+ 
+class _ChartData {
+  _ChartData(this.x, this.y);
+ 
+  final String x;
+  final double y;
+}*/

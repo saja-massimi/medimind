@@ -5,27 +5,16 @@ import 'package:medi_mind/model/pills.dart';
 
 final List<String> Timely = ['Day', 'Month', 'Year'];
 String? selectedValue;
-
-final List<String> Numbers = [
-  '1',
-  '2',
-  '3',
-  '4',
-  '5',
-  '6',
-  '7',
-  '8',
-  '9',
-  ' 10'
-];
-var seen = Set<String>();
+String? selectedValue1;
+final List<String> Numbers = [ '1','2','3','4','5','6','7','8', '9',' 10'];
+var seen = <String>{};
 List<String> uniqueList =
     Numbers.where((numbers) => seen.add(numbers)).toList();
 
-String? selectedValue1;
+
 
 class addMed extends StatefulWidget {
-  const addMed({Key? key, required this.onAddPill});
+   addMed({super.key,  required this.onAddPill});
   final void Function(pills pill) onAddPill;
 
   @override
@@ -36,7 +25,7 @@ class _addMedState extends State<addMed> {
   final TextEditingController _medNameController = TextEditingController();
   final formatter = DateFormat().add_yMd();
   TimeOfDay? _selectedTime;
-
+   DateTime? _selectedDate;
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -73,15 +62,24 @@ class _addMedState extends State<addMed> {
                   style: TextStyle(color: Colors.white),
                 ),
                 IconButton(
-                  onPressed: () {
-                    showDatePicker(
+                  onPressed: () async{
+               final  DateTime? pickedDate= await showDatePicker(
                       context: context,
                       firstDate: DateTime.now(),
                       lastDate: DateTime(2035),
-                      initialDate: DateTime(2024),
-                    ).then((value) => null);
+                      initialDate: DateTime.now(),
+                    );
+              setState(() {
+                _selectedDate = pickedDate;
+              });
                   },
+                  
                   icon: const Icon(Icons.calendar_month),
+                ),
+                Text(_selectedDate==null?'':
+      
+                DateFormat().add_yMd().format(_selectedDate!)
+                
                 ),
                 const SizedBox(width: 10),
                 const Text(
@@ -97,10 +95,16 @@ class _addMedState extends State<addMed> {
                     if (selectedTime != null) {
                       setState(() {
                         _selectedTime = selectedTime;
+                       
                       });
                     }
                   },
                   icon: const Icon(Icons.access_time),
+                 
+                ), 
+                Text(_selectedTime==null? '':
+                
+                DateFormat.Hm().format(DateTime(2024,1,1,_selectedTime!.hour,_selectedTime!.minute))
                 ),
               ],
             ),

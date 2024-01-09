@@ -5,10 +5,10 @@ const uuid = Uuid();
 
 class pills {
   final String id;
-  final String pillName;
-  final TimeOfDay formatter;
-  final bool isTaken;
-  final DateTime date;
+  late  String pillName;
+  late  TimeOfDay formatter;
+  late  bool isTaken;
+  late  DateTime date;
 
   pills(
       {required this.date,

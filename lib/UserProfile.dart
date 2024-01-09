@@ -13,12 +13,12 @@ class Profile extends StatefulWidget {
 class _ProfileState extends State<Profile> {
   final TextEditingController _usernameController1 = TextEditingController();
   final TextEditingController _passwordController1 = TextEditingController();
-  final TextEditingController _phoneController1 = TextEditingController();
+  final TextEditingController _emailController1 = TextEditingController();
   
 
   late String username;
   late String password ;
-  late String phone_number ;
+  late String email ;
   
   @override
   Widget build(BuildContext context) {
@@ -48,9 +48,9 @@ body: Padding(
             ),
             const SizedBox(height: 16.0),
             TextField(
-              controller: _phoneController1,
+              controller: _emailController1,
               decoration: const InputDecoration(
-                  labelText: 'Phone Number',
+                  labelText: 'Email',
                   labelStyle: TextStyle(color: Colors.white)),
             ),
             Row(
@@ -93,9 +93,9 @@ body: Padding(
               onPressed: () {
                  username = _usernameController1.text;
                  password = _passwordController1.text;
-                 phone_number = _phoneController1.text;
+                email = _emailController1.text;
                 Navigator.push(
-                    context, MaterialPageRoute(builder: (context) => Home()));
+                    context, MaterialPageRoute(builder: (context) => const Home()));
               },
               child: const Text(
                 'Save Changes',

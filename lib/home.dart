@@ -2,13 +2,13 @@ import 'package:flutter/material.dart';
 import 'package:medi_mind/UserProfile.dart';
 import 'package:medi_mind/addMed.dart';
 import 'package:medi_mind/calendar.dart';
-import 'package:medi_mind/charts.dart';
 import 'package:medi_mind/data/dummyData.dart';
 import 'package:medi_mind/model/pills.dart';
 import 'package:medi_mind/widgets/pill_grid_item.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 
 class Home extends StatefulWidget {
-  Home({super.key});
+  const Home({super.key});
 
   @override
   State<Home> createState() => _HomeState();
@@ -27,6 +27,9 @@ class _HomeState extends State<Home> {
     });
   }
 
+
+
+ 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -51,10 +54,12 @@ class _HomeState extends State<Home> {
                       context,
                       MaterialPageRoute(
                           builder: (context) =>
-                              CalendarPage(pillsList: availablePills)));
+                              CalendarPage(pillsList: availablePills))
+                              
+                              );
                 },
               ),
-              ListTile(
+            /*  ListTile(
                 leading: const Icon(Icons.bar_chart),
                 title: const Text('Stats'),
                 onTap: () {
@@ -63,7 +68,20 @@ class _HomeState extends State<Home> {
                       MaterialPageRoute(
                           builder: (context) => Charts(availablePills)));
                 },
+              )*/
+
+                ListTile(
+                leading: const Icon(Icons.exit_to_app),
+                title: const Text('Sign Out'),
+                onTap: () {
+                  FirebaseAuth.instance.signOut(); 
+                  
+                },
               )
+
+
+
+
             ],
           ),
         ),

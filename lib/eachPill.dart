@@ -18,7 +18,7 @@ class _eachPillState extends State<eachPill> {
   final TextEditingController _medNameController = TextEditingController();
   final formatter = DateFormat().add_yMd();
   TimeOfDay? _selectedTime;
-
+ DateTime? _selectedDate;
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -55,15 +55,26 @@ class _eachPillState extends State<eachPill> {
                   style: TextStyle(color: Colors.white),
                 ),
                 IconButton(
-                  onPressed: () {
-                    showDatePicker(
+                  onPressed: () async{
+               final  DateTime? pickedDate= await showDatePicker(
                       context: context,
                       firstDate: DateTime.now(),
                       lastDate: DateTime(2035),
-                      initialDate: DateTime(2024),
-                    ).then((value) => null);
+                      initialDate: DateTime.now(),
+                    );
+                     setState(() {
+                _selectedDate = pickedDate;
+              });
+               
                   },
                   icon: const Icon(Icons.calendar_month),
+                 
+                
+                ),
+                Text(_selectedDate==null?'':
+      
+                DateFormat().add_yMd().format(_selectedDate!)
+                
                 ),
                 const SizedBox(width: 10),
                 const Text(
@@ -83,6 +94,10 @@ class _eachPillState extends State<eachPill> {
                     }
                   },
                   icon: const Icon(Icons.access_time),
+                ),
+                Text(_selectedTime==null? '':           
+                DateFormat.Hm().format(DateTime(2024,1,1,_selectedTime!.hour,_selectedTime!.minute))
+
                 ),
               ],
             ),
@@ -154,12 +169,16 @@ class _eachPillState extends State<eachPill> {
                 ),
                 ElevatedButton(
                   onPressed: () {
-                    widget.onEditPill(pills(
-                        pillName: _medNameController.text,
-                        formatter: _selectedTime!,
-                        date: DateTime(2024),
-                        isTaken: false));
-                    Navigator.pop(context);
+                    
+                        
+                   setState(() {
+                      widget.pillItem.pillName = _medNameController.text;
+                      widget.pillItem.date = _selectedDate!;
+                      widget.pillItem.formatter = _selectedTime!;
+                      widget.pillItem.isTaken = false;
+                         });
+                    
+                   
                   },
                   child: const Text('Save Changes'),
                 ),

@@ -3,7 +3,7 @@ import 'package:medi_mind/eachPill.dart';
 import '../model/pills.dart';
 
 class PillsScreen extends StatefulWidget {
-  const PillsScreen({
+  PillsScreen({
     Key? key,
     required this.title,
     required this.pillItem,
@@ -13,7 +13,7 @@ class PillsScreen extends StatefulWidget {
 
   final String title;
   final pills pillItem;
-  final bool isTaken;
+  bool isTaken;
   final Color pillColor;
 
   @override
@@ -21,7 +21,7 @@ class PillsScreen extends StatefulWidget {
 }
 
 class _PillsScreenState extends State<PillsScreen> {
-  bool isTaken = false;
+  bool isTaken=false;
   @override
   void initState() {
     super.initState();
@@ -59,7 +59,9 @@ class _PillsScreenState extends State<PillsScreen> {
                     value: isTaken,
                     onChanged: (bool? flag) {
                       setState(() {
-                        isTaken = flag!;
+                      widget.isTaken = flag!;
+                      isTaken = flag!;
+
                       });
                     },
                   )

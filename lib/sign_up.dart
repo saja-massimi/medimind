@@ -1,8 +1,9 @@
-import 'dart:convert';
+import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
-import 'package:http/http.dart' as http;
-import 'package:medi_mind/home.dart';
+ 
 
+ final _firebase = FirebaseAuth.instance;
 final List<String> Gender = ['Female', 'Male'];
 String? selectedValue;
 
@@ -27,7 +28,7 @@ class _SignUp extends State<SignUp> {
         title: const Text('Sign Up', style: TextStyle(color: Colors.white)),
       ),
       body: Padding(
-        padding: const EdgeInsets.all(16.0),
+        padding:  EdgeInsets.all(16.0),
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
@@ -80,42 +81,39 @@ class _SignUp extends State<SignUp> {
                 ),
               ],
             ),
-            const SizedBox(height: 20.0),
+            SizedBox(height: 20.0),
             ElevatedButton(
               onPressed: () async {
                 String username = _usernameController.text;
                 String password = _passwordController.text;
                 String email = _emailController.text;
+try {
+  
+                 UserCredential userCredential= 
+              await _firebase.createUserWithEmailAndPassword(
+                email: email, password: password);
+              await  FirebaseFirestore.instance.collection('Users').doc( userCredential.user!.uid)
+                .set({
+                  'username':_usernameController.text,
+                  'email':_emailController.text,
+                  'gender': selectedValue,
 
-                final response = await http.post(
-                  Uri.parse('http://localhost/Medimind/sign_up.php'),
-                  headers: {'Content-Type': 'application/json'},
-                  body: jsonEncode({
-                    'username': username,
-                    'password': password,
-                    'email': email,
-                    'gender': selectedValue,
-                  }),
-                );
+                });
 
-                if (response.statusCode == 200) {
-                  final result = jsonDecode(response.body);
-                  if (result['status'] == 'success') {
-                    print('User signed up successfully');
-                    Navigator.push(context,
-                        MaterialPageRoute(builder: (context) => Home()));
-                  } else {
-                    print('Error: ${result['message']}');
-                  }
-                } else {
-                  print(
-                      'HTTP Request failed with status ${response.statusCode}');
-                }
+} on FirebaseAuthException catch (e) {
+  ScaffoldMessenger.of(context).clearSnackBars();
+  ScaffoldMessenger.of(context).showSnackBar(
+    SnackBar(content: Text(e.message?? 'Authentication Failed'))
+  );
+
+}
+
+               
               },
               child: const Text('Sign Up',
                   style: TextStyle(color: Color.fromARGB(255, 95, 94, 94))),
             ),
-            const SizedBox(height: 12.0),
+           const SizedBox(height: 12.0),
             TextButton(
               onPressed: () {
                 Navigator.pop(context);

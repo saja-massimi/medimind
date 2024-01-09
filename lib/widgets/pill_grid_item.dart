@@ -32,7 +32,7 @@ class PillsList extends StatelessWidget {
                     title: pill_list[index].pillName,
                     pillItem: pill_list[index],
                     isTaken: false,
-                    pillColor: Color.fromARGB(221, 255, 255, 255),
+                    pillColor: const Color.fromARGB(221, 255, 255, 255),
                   ),
                 ),
                 itemCount: availablePills.length,
