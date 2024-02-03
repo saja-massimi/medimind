@@ -1,66 +1,62 @@
-/*import 'package:flutter/material.dart';
-import 'package:syncfusion_flutter_charts/charts.dart';
- 
+import 'dart:js_interop';
+import 'dart:math';
 
-class _ChartApp extends StatelessWidget {
+import 'package:syncfusion_flutter_charts/charts.dart';
+import 'package:syncfusion_flutter_charts/sparkcharts.dart';
+import 'package:flutter/material.dart';
+
+import 'package:medi_mind/model/pills.dart';
+
+class Charts extends StatelessWidget {
+   List<pills> availablePills;
+
+
+  Charts(this.availablePills);
+
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(
-      theme: ThemeData(primarySwatch: Colors.blue),
-      home: _MyHomePage(),
+    
+    return Scaffold(
+      appBar: AppBar(
+        title: const Text('Bar Charts'),
+        backgroundColor: Colors.brown,
+      ),
+      body: 
+      
+      Column(
+        
+        
+        children: [
+          //Initialize the chart widget
+          SfCartesianChart(
+              primaryXAxis: CategoryAxis(),
+              // Chart title
+              title: const ChartTitle(text: 'Pills Adherence'),
+              // Enable legend
+              legend: const Legend(isVisible: true),
+              // Enable tooltip
+              tooltipBehavior: TooltipBehavior(enable: true),
+              series: <CartesianSeries<pills, String>>[
+                LineSeries<pills, String>(
+                    dataSource: availablePills,
+                    xValueMapper: (pills pill1, _) => pill1.pillName,
+                    yValueMapper: (pills pill1, _) => 1,
+                    name: 'Pills',
+                    // Enable data label
+                    dataLabelSettings: const DataLabelSettings(isVisible: true))
+              ]),
+         
+        ])
     );
   }
 }
+    
 
-class _MyHomePage extends StatefulWidget {
-  // ignore: prefer_const_constructors_in_immutables
-  _MyHomePage({Key? key}) : super(key: key);
 
-  @override
-  _MyHomePageState createState() => _MyHomePageState();
+  class _SalesData {
+  _SalesData(this.year, this.sales);
+
+  final String year;
+  final double sales;
 }
 
-class _MyHomePageState extends State<_MyHomePage> {
-  late List<_ChartData> data;
-  late TooltipBehavior _tooltip;
- 
-  @override
-  void initState() {
-    data = [
-      _ChartData('CHN', 12),
-      _ChartData('GER', 15),
-      _ChartData('RUS', 30),
-      _ChartData('BRZ', 6.4),
-      _ChartData('IND', 14)
-    ];
-    _tooltip = TooltipBehavior(enable: true);
-    super.initState();
-  }
- 
-  @override
-  Widget build(BuildContext context) {
-    return Scaffold(
-        appBar: AppBar(
-          title: const Text('Syncfusion Flutter chart'),
-        ),
-        body: SfCartesianChart(
-            primaryXAxis: CategoryAxis(),
-            primaryYAxis: NumericAxis(minimum: 0, maximum: 40, interval: 10),
-            tooltipBehavior: _tooltip,
-            series: <CartesianSeries<_ChartData, String>>[
-              ColumnSeries<_ChartData, String>(
-                  dataSource: data,
-                  xValueMapper: (_ChartData data, _) => data.x,
-                  yValueMapper: (_ChartData data, _) => data.y,
-                  name: 'Gold',
-                  color: Color.fromRGBO(8, 142, 255, 1))
-            ]));
-  }
-}
- 
-class _ChartData {
-  _ChartData(this.x, this.y);
- 
-  final String x;
-  final double y;
-}*/

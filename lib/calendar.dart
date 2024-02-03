@@ -5,7 +5,7 @@ import 'package:table_calendar/table_calendar.dart';
 import 'package:medi_mind/model/pills.dart';
 
 class CalendarPage extends StatefulWidget {
-  List<pills> pillsList;
+  late List<pills> pillsList;
 
    CalendarPage({Key? key, required this.pillsList}) : super(key: key);
 
@@ -19,7 +19,7 @@ class _CalendarPageState extends State<CalendarPage> {
   late DateTime _selectedDay;
 
   List<Color> pillColors = [
-    const Color.fromARGB(255, 212, 243, 33),
+   // const Color.fromARGB(255, 212, 243, 33),
     const Color.fromARGB(255, 3, 131, 15),
     const Color.fromARGB(255, 103, 105, 103),
   ];
@@ -80,8 +80,7 @@ class _CalendarPageState extends State<CalendarPage> {
               itemBuilder: (context, index) {
                 return ListTile(
                   title: Text(widget.pillsList[index].pillName),
-                  tileColor:widget.pillsList[index].isTaken? Colors.green: Colors.grey
-                  //pillColors[index % pillColors.length],
+                  tileColor:pillColors[index % pillColors.length],
                 );
               },
             ),

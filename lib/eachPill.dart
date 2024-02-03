@@ -2,12 +2,14 @@ import 'package:dropdown_button2/dropdown_button2.dart';
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
 import 'package:medi_mind/addMed.dart';
+import 'package:medi_mind/data/dummyData.dart';
 import 'package:medi_mind/model/pills.dart';
+import 'package:medi_mind/pills_screen.dart';
 
 class eachPill extends StatefulWidget {
-  const eachPill({super.key, required this.pillItem, required this.onEditPill});
+   eachPill({super.key, required this.pillItem});
 
-  final void Function(pills pill) onEditPill;
+
   final pills pillItem;
 
   @override
@@ -18,7 +20,7 @@ class _eachPillState extends State<eachPill> {
   final TextEditingController _medNameController = TextEditingController();
   final formatter = DateFormat().add_yMd();
   TimeOfDay? _selectedTime;
- DateTime? _selectedDate;
+  DateTime? _selectedDate;
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -170,12 +172,29 @@ class _eachPillState extends State<eachPill> {
                 ElevatedButton(
                   onPressed: () {
                     
-                        
+                      /*  void _navigateToSecondPage() async {
+    final result = await Navigator.push(
+      context,
+      MaterialPageRoute(
+        builder: (context) => SecondPage(dataFromFirstPage: dataFromSecondPage),
+      ),
+    );
+
+    // When the second page is popped, the updated value will be received here
+    setState(() {
+      dataFromSecondPage = result ?? dataFromSecondPage; // Update with the new value or keep the old value
+    });
+  }*/
                    setState(() {
+                      
+                      
                       widget.pillItem.pillName = _medNameController.text;
                       widget.pillItem.date = _selectedDate!;
                       widget.pillItem.formatter = _selectedTime!;
                       widget.pillItem.isTaken = false;
+                      
+Navigator.pop(context, widget.pillItem);
+
                          });
                     
                    

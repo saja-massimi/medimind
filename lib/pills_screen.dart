@@ -1,8 +1,14 @@
 import 'package:flutter/material.dart';
+import 'package:medi_mind/data/dummyData.dart';
 import 'package:medi_mind/eachPill.dart';
+import 'package:medi_mind/widgets/pill_grid_item.dart';
 import '../model/pills.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
 class PillsScreen extends StatefulWidget {
+
+
+  
   PillsScreen({
     Key? key,
     required this.title,
@@ -16,17 +22,17 @@ class PillsScreen extends StatefulWidget {
   bool isTaken;
   final Color pillColor;
 
+
   @override
   State<PillsScreen> createState() => _PillsScreenState();
 }
 
 class _PillsScreenState extends State<PillsScreen> {
   bool isTaken=false;
-  @override
-  void initState() {
-    super.initState();
-    isTaken = widget.isTaken;
-  }
+
+
+
+  
 
   @override
   Widget build(BuildContext context) {
@@ -36,7 +42,7 @@ class _PillsScreenState extends State<PillsScreen> {
           context,
           MaterialPageRoute(
             builder: (context) => eachPill(
-                pillItem: widget.pillItem, onEditPill: (pills pill) {}),
+                pillItem: widget.pillItem, ),
           ),
         );
       },
@@ -59,8 +65,8 @@ class _PillsScreenState extends State<PillsScreen> {
                     value: isTaken,
                     onChanged: (bool? flag) {
                       setState(() {
-                      widget.isTaken = flag!;
-                      isTaken = flag!;
+                      isTaken  = flag!;
+                      
 
                       });
                     },
